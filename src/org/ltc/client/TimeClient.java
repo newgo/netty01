@@ -19,52 +19,54 @@ public class TimeClient {
             port = Integer.valueOf(args[0]);
         }
 
-        Socket socket = null;
-        BufferedReader in = null;
-        PrintWriter out = null;
-        try {
-            socket = new Socket("127.0.0.1",port);
-            in = new BufferedReader(new InputStreamReader(
-                    socket.getInputStream()
-            ));
-            out = new PrintWriter(socket.getOutputStream(),true);
-//            for (int i = 0; i < 1; i++) {
-//                out.println("query time order");
-//                System.out.println("Send order 2 server succeed.");
+//        Socket socket = null;
+//        BufferedReader in = null;
+//        PrintWriter out = null;
+//        try {
+//            socket = new Socket("127.0.0.1",port);
+//            in = new BufferedReader(new InputStreamReader(
+//                    socket.getInputStream()
+//            ));
+//            out = new PrintWriter(socket.getOutputStream(),true);
+////            for (int i = 0; i < 1; i++) {
+////                out.println("query time order");
+////                System.out.println("Send order 2 server succeed.");
+////            }
+////            String resp = null;
+////            while ((resp = in.readLine()) != null){
+////                System.out.println("Now is : " + resp);
+////            }
+//            out.println("query time order");
+//            System.out.println("Send order 2 server succeed.");
+//            String resp = in.readLine();
+//            System.out.println("Now is : " + resp);
+//
+//        }catch (Exception e){
+//
+//        }finally {
+//            if (out != null){
+//                out.close();
+//                out = null;
 //            }
-//            String resp = null;
-//            while ((resp = in.readLine()) != null){
-//                System.out.println("Now is : " + resp);
+//            if (in != null){
+//                try {
+//                    in.close();
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
+//                in = null;
 //            }
-            out.println("query time order");
-            System.out.println("Send order 2 server succeed.");
-            String resp = in.readLine();
-            System.out.println("Now is : " + resp);
+//            if (socket !=null){
+//                try {
+//                    socket.close();
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
+//                socket = null;
+//            }
+//        }
 
-        }catch (Exception e){
-
-        }finally {
-            if (out != null){
-                out.close();
-                out = null;
-            }
-            if (in != null){
-                try {
-                    in.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                in = null;
-            }
-            if (socket !=null){
-                try {
-                    socket.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                socket = null;
-            }
-        }
+        new Thread(new TimeClientHandle("127.0.0.1",port),"TimeClient-001").start();
 
     }
 }
